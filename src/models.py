@@ -40,11 +40,11 @@ class Character(Base):
     __tablename__ = 'CHARACTERS'
     chara_id = Column(Integer, primary_key=True)
     chara_name = Column(String(100), nullable=False)
-    chara_from = Column(String, ForeignKey('PLANETS.planet_name'), nullable=False)
+    chara_from = Column(String, ForeignKey('PLANETS.planet_name'), primary_key=True, nullable=False)
     chara_faction = Column(String, ForeignKey('FACTIONS.faction_name'), nullable=False)
     
     chara_favourites = relationship('Favourite', back_populates='fav_character')
-    chara_fromPlanet = relationship('Planet', uselist=False, back_populates='planet_character')
+    # chara_fromPlanet = relationship('Planet', uselist=False, back_populates='planet_character')
     chara_team = relationship('Faction', uselist=False, back_populates='faction_chara')
 
 
@@ -56,7 +56,7 @@ class Planet(Base):
     planet_faction = Column(String, ForeignKey('FACTIONS.faction_id'), nullable=False)
     
     planet_favourites = relationship('Favourite', back_populates='fav_planet')
-    planet_character = relationship('Character', back_populates='chara_fromPlanet')
+    # planet_character = relationship('Character', back_populates='chara_fromPlanet')
     planet_from = relationship('Faction', back_populates='faction_planet')
 
 
